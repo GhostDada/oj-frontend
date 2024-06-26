@@ -4,9 +4,7 @@ import { StoreOptions } from "vuex";
 export default {
   namespaced: true,
   state: {
-    loginUser: {
-      username: "未登录",
-    },
+    loginUser: {},
   },
   mutations: {
     updateUser(state, payload) {
@@ -16,7 +14,7 @@ export default {
   getters: {},
   actions: {
     getLoginUser({ commit, state }, payload) {
-      commit("updateUser", { username: "梁兆浩" });
+      commit("updateUser", { username: "梁兆浩", role: "admin"});
     },
   },
 } as StoreOptions<any>;

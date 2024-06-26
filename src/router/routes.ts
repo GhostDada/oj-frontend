@@ -8,6 +8,19 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/HomeView.vue"),
   },
   {
+    path: "/noAuth",
+    name: "无权限页面",
+    component: () => import("@/views/NoAuthView.vue"),
+  },
+  {
+    path: "/admin",
+    name: "管理员可见",
+    component: () => import("@/views/AdminView.vue"),
+    meta: {
+      access: 'canAdmin'
+    }
+  },
+  {
     path: "/about",
     name: "关于我的",
     // route level code-splitting
