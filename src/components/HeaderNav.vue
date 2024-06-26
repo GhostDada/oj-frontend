@@ -22,7 +22,7 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>鱼皮</div>
+      <div>{{ store.state.user.loginUser.username ?? "未登录" }}</div>
     </a-col>
   </a-row>
 </template>
@@ -31,9 +31,15 @@
 import { routes } from "@/router/routes";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 const router = useRouter();
+const store = useStore();
 const selectKey = ref(["/"]);
+
+setTimeout(() => {
+  store.dispatch("user/getLoginUser");
+}, 3000);
 
 // 路由跳转后执行
 router.afterEach((to) => {
