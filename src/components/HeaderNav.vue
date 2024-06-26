@@ -1,5 +1,10 @@
 <template>
-  <a-row id="headerNav" style="margin-bottom: 16px" align="center">
+  <a-row
+    id="headerNav"
+    style="margin-bottom: 16px"
+    align="center"
+    :wrap="false"
+  >
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -16,7 +21,7 @@
             <div class="title">OJ判题系统</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -29,16 +34,36 @@
 
 <script setup lang="ts">
 import { routes } from "@/router/routes";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
 const store = useStore();
+
 const selectKey = ref(["/"]);
+// 展示的菜单项
+const visibleRoutes = computed(() => {
+  return routes.filter((item) => {
+    if (item.meta?.showInMenu) {
+      return false;
+    }
+
+    // 根据权限过滤菜单
+    if (!checkAccess(store.state.user.loginUser, item.meta?.access as string)) {
+      return false;
+    }
+    return true;
+  });
+});
 
 setTimeout(() => {
-  store.dispatch("user/getLoginUser");
+  store.dispatch("user/getLoginUser", {
+    username: "梁兆浩管理员",
+    role: ACCESS_ENUM.ADMIN,
+  });
 }, 3000);
 
 // 路由跳转后执行

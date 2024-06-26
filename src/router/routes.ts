@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import ACCESS_ENUM from "@/access/accessEnum";
 import { RouteRecordRaw } from "vue-router";
 
 export const routes: Array<RouteRecordRaw> = [
@@ -13,11 +14,19 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/NoAuthView.vue"),
   },
   {
+    path: "/hide",
+    name: "隐藏页面",
+    component: () => import("@/views/HomeView.vue"),
+    meta: {
+      showInMenu: true
+    }
+  },
+  {
     path: "/admin",
     name: "管理员可见",
     component: () => import("@/views/AdminView.vue"),
     meta: {
-      access: 'canAdmin'
+      access: ACCESS_ENUM.ADMIN
     }
   },
   {

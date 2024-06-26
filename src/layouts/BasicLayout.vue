@@ -1,13 +1,15 @@
 <template>
   <div id="basicLayout">
-    <a-layout style="height: 400px">
+    <a-layout style="min-height: 100vh">
       <a-layout-header>
         <HeaderNav />
       </a-layout-header>
-      <a-layout-content>
+      <a-layout-content class="content">
         <router-view />
       </a-layout-content>
-      <a-layout-footer>Footer</a-layout-footer>
+      <a-layout-footer class="footer"
+        >OJ - 判题系统 By 是阿浩啊</a-layout-footer
+      >
     </a-layout>
   </div>
 </template>
@@ -16,4 +18,18 @@
 import HeaderNav from "@/components/HeaderNav.vue";
 </script>
 
-<style></style>
+<style scoped>
+#basicLayout .content {
+  padding: 20px;
+}
+
+#basicLayout .footer {
+  padding: 16px;
+  text-align: center;
+  background-color: antiquewhite;
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+</style>

@@ -14,7 +14,7 @@ export default {
   getters: {},
   actions: {
     getLoginUser({ commit, state }, payload) {
-      commit("updateUser", { username: "梁兆浩", role: "admin"});
+      commit("updateUser", payload);
     },
   },
 } as StoreOptions<any>;
